@@ -1,14 +1,14 @@
 import { Avatar } from '@mui/material';
 import React,{useState,useEffect} from 'react'
-import "./Sidebar.css";
+import "./SidebarChat.css";
 
 const SidebarChat = ()=> {
-
-    const [seed, setSeed] = useState('')
+    // Seed will have a random number
+    const [seed, setSeed] = useState('') 
 
 
     useEffect(() => {
-        
+        //Set the seed to a random number and without decimals 
        setSeed(Math.floor(Math.random()*1000));
     }, [])
 
