@@ -6,6 +6,7 @@
 
 }
 
+/* Sideber search */
 .sidebar__search{
     display: flex;
     align-items: center;
@@ -30,9 +31,10 @@
 
 .sidebar__searchContainer > .MuiSvgIcon-root{
     color: gray;
-    padding: 10px;
+    padding: 10px !important;
 }
 
+/* Sidebar Header */
 .sidebar__header{
 
     display: flex;
@@ -52,4 +54,12 @@
 .sidebar__headerRight > .MuiSvgIcon-root{
     margin-right: 2vw;
     font-size: 24px !important;
+}
+
+/* sidebar Chat */
+
+.sidebar__chats{
+    flex: 1;
+    background-color: white;
+    overflow: scroll;
 }

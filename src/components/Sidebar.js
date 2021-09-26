@@ -3,6 +3,7 @@ import { Avatar, IconButton } from "@mui/material";
 
 import React from "react";
 import "./Sidebar.css";
+import SidebarChat from "./SidebarChat";
 
 function Sidebar() {
   return (
@@ -30,7 +31,12 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="sidebar__chats"></div>
+      <div className="sidebar__chats">
+          <SidebarChat/>
+          <SidebarChat/>
+          <SidebarChat/>
+          <SidebarChat/>
+      </div>
     </div>
   );
 }
