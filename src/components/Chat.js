@@ -13,14 +13,14 @@ function Chat() {
   }, []);
 
   return (
-    <div className="Chat">
+    <div className="chat">
       <div className="chat__header">
         <Avatar src={`https://avatars.dicebear.com/api/personas/${seed}.svg`} />
         <div className="chat__headerInfo">
           <h3>nombre Chat</h3>
           <p>Chisme.....blabla</p>
         </div>
-        <div className="chet__headerRight">
+        <div className="chat__headerRight">
           <IconButton>
             <SearchOutlined />
           </IconButton>
@@ -32,7 +32,10 @@ function Chat() {
           </IconButton>
         </div>
       </div>
-      <div className="chat__body"></div>
+      <div className="chat__body">
+        
+
+      </div>
       <div className="chat__footer"></div>
     </div>
   );
