@@ -1,4 +1,4 @@
-import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
+import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from "@material-ui/icons";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import "./Chat.css";
@@ -33,14 +33,20 @@ function Chat() {
         </div>
       </div>
       <div className="chat__body">
-        <p className="chat__message">
-        <span className="chat__name">Camilo CV</span>
+        <p className={`chat__message ${true &&  "chat__reciever"}`}>
+          <span className="chat__name">Camilo CV</span>
           Hi guys
           <span className="chat__timestamp">3:34pm</span>
         </p>
-        
       </div>
-      <div className="chat__footer"></div>
+      <div className="chat__footer">
+        <InsertEmoticon/>
+        <form>
+          <input type="text" />
+          <button>Send a message</button>
+        </form>
+        <Mic/>
+      </div>
     </div>
   );
 }

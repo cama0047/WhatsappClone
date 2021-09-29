@@ -54,6 +54,12 @@
 
 }
 
+.chat__reciever{
+    margin-left: auto;
+    background-color: #dcf8c6;
+
+}
+
 .chat__name{
     position: absolute;
     top:-15px;
@@ -65,4 +71,8 @@
 .chat__timestamp{
     margin-left: 10px;
     font-size: xx-small;
+}
+
+.chat__footer{
+    
 }
