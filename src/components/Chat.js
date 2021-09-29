@@ -34,8 +34,11 @@ function Chat() {
       </div>
       <div className="chat__body">
         <p className="chat__message">
+        <span className="chat__name">Camilo CV</span>
           Hi guys
+          <span className="chat__timestamp">3:34pm</span>
         </p>
+        
       </div>
       <div className="chat__footer"></div>
     </div>

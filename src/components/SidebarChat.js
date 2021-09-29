@@ -25,7 +25,7 @@ const SidebarChat = ({ addNewChat }) => {
     <div className="sidebarChat">
       <Avatar src={`https://avatars.dicebear.com/api/personas/${seed}.svg`} />
       <div className="sidebar__info">
-        <h2>Silvi</h2>
+        <h2>Soe</h2>
         <p>Last message..</p>
       </div>
     </div>

@@ -50,5 +50,19 @@
     background-color: white;
     border-radius: 10px;
     width: fit-content;
+    margin-bottom: 30px;
 
+}
+
+.chat__name{
+    position: absolute;
+    top:-15px;
+    font-weight: 800;
+    font-size: xx-small;
+    color: blue;
+    
+}
+.chat__timestamp{
+    margin-left: 10px;
+    font-size: xx-small;
 }
