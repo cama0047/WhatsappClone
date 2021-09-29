@@ -1,4 +1,10 @@
-import { AttachFile, InsertEmoticon, Mic, MoreVert, SearchOutlined } from "@material-ui/icons";
+import {
+  AttachFile,
+  InsertEmoticon,
+  Mic,
+  MoreVert,
+  SearchOutlined,
+} from "@material-ui/icons";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import "./Chat.css";
@@ -6,6 +12,12 @@ import "./Chat.css";
 function Chat() {
   // Seed will have a random number
   const [seed, setSeed] = useState("");
+  const [input, setInput] = useState("");
+
+  const sendMessage = (e) =>{
+    e.preventDefault();
+      console.log("sending message....", input); // <----PRINT
+  }
 
   useEffect(() => {
     //Set the seed to a random number and without decimals
@@ -33,19 +45,20 @@ function Chat() {
         </div>
       </div>
       <div className="chat__body">
-        <p className={`chat__message ${true &&  "chat__reciever"}`}>
+        <p className={`chat__message ${true && "chat__reciever"}`}>
           <span className="chat__name">Camilo CV</span>
           Hi guys
           <span className="chat__timestamp">3:34pm</span>
         </p>
       </div>
+
       <div className="chat__footer">
-        <InsertEmoticon/>
+        <InsertEmoticon />
         <form>
-          <input type="text" />
-          <button>Send a message</button>
+          <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Type a message" />
+          <button onClick={sendMessage} type= "submit" >Send a message</button>
         </form>
-        <Mic/>
+        <Mic />
       </div>
     </div>
   );
