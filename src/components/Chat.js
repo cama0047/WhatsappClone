@@ -17,6 +17,7 @@ function Chat() {
   const sendMessage = (e) =>{
     e.preventDefault();
       console.log("sending message....", input); // <----PRINT
+      setInput(""); //<-- Clean the input 
   }
 
   useEffect(() => {

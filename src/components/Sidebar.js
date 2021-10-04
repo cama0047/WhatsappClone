@@ -1,11 +1,36 @@
 import { Chat, DonutLarge, MoreVert, SearchOutlined } from "@material-ui/icons";
 import { Avatar, IconButton } from "@mui/material";
 
-import React from "react";
+import React, {useState, useEffect} from "react";
+import db from "../Firebase";
 import "./Sidebar.css";
 import SidebarChat from "./SidebarChat";
 
+
 function Sidebar() {
+
+const [rooms, setRooms] = useState([])
+  
+  
+  useEffect(() => {
+    //Getting the rooms in firebase
+    db.collection("rooms").onSnapshot(
+      (snapshot) =>
+        setRooms(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        ),
+      (error) => {
+        // ... Houston we have a problem
+        console.log("error line 27 ", error); // <----PRINT
+      }
+    );
+    
+  }, [])
+
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -32,8 +57,12 @@ function Sidebar() {
       </div>
 
       <div className="sidebar__chats">
+        <h1>{rooms.data}</h1>
         <SidebarChat addNewChat />
-        <SidebarChat />
+        {rooms.map(room =>(
+          <SidebarChat key={room.id} id={room.id} name={room.data.name}/>
+
+        ))}
         <SidebarChat />
         <SidebarChat />
       </div>
