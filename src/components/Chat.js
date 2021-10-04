@@ -7,12 +7,31 @@ import {
 } from "@material-ui/icons";
 import { Avatar, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import db from "../Firebase";
 import "./Chat.css";
+
+
 
 function Chat() {
   // Seed will have a random number
   const [seed, setSeed] = useState("");
   const [input, setInput] = useState("");
+  const {roomId} = useParams();
+const [roomName, setRoomName] = useState("");
+
+// Every time that roomId changes, we are gping to call a function to get new messagest to that roomId
+useEffect(() => {
+  
+  if (roomId){
+    //
+    db.collection("rooms").doc(roomId).onSnapshot((snapshot)=>(setRoomName(snapshot.data().name)))
+  }
+
+}, [roomId])
+
+
+
 
   const sendMessage = (e) =>{
     e.preventDefault();
@@ -30,7 +49,7 @@ function Chat() {
       <div className="chat__header">
         <Avatar src={`https://avatars.dicebear.com/api/personas/${seed}.svg`} />
         <div className="chat__headerInfo">
-          <h3>nombre Chat</h3>
+          <h3>{roomName}</h3>
           <p>Chisme.....blabla</p>
         </div>
         <div className="chat__headerRight">

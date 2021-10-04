@@ -14,7 +14,7 @@ const [rooms, setRooms] = useState([])
   
   useEffect(() => {
     //Getting the rooms in firebase
-    db.collection("rooms").onSnapshot(
+    const unsubscribe = db.collection("rooms").onSnapshot(
       (snapshot) =>
         setRooms(
           snapshot.docs.map((doc) => ({
@@ -28,6 +28,10 @@ const [rooms, setRooms] = useState([])
       }
     );
     
+      return () => {
+        unsubscribe(); //<---- Release
+      }
+
   }, [])
 
 
@@ -63,8 +67,7 @@ const [rooms, setRooms] = useState([])
           <SidebarChat key={room.id} id={room.id} name={room.data.name}/>
 
         ))}
-        <SidebarChat />
-        <SidebarChat />
+        
       </div>
     </div>
   );

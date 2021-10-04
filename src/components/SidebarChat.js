@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import "./SidebarChat.css";
 import db from '../Firebase'
+import { Link } from "react-router-dom";
 
 const SidebarChat = ({ addNewChat, id, name }) => {
   // Seed will have a random number
@@ -24,8 +25,10 @@ const SidebarChat = ({ addNewChat, id, name }) => {
 
     }
   };
+/* displayed to the user  */
 
   return !addNewChat ? (
+    <Link to={`/rooms/${id}`}>
     <div className="sidebarChat">
       <Avatar src={`https://avatars.dicebear.com/api/personas/${seed}.svg`} />
       <div className="sidebar__info">
@@ -33,6 +36,7 @@ const SidebarChat = ({ addNewChat, id, name }) => {
         <p>Last message..</p>
       </div>
     </div>
+    </Link>
   ) : (
 
     <div onClick={createChat} className="sidebarChat">
