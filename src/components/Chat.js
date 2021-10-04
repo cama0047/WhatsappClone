@@ -11,33 +11,39 @@ import { useParams } from "react-router-dom";
 import db from "../Firebase";
 import "./Chat.css";
 
-
-
 function Chat() {
   // Seed will have a random number
   const [seed, setSeed] = useState("");
   const [input, setInput] = useState("");
-  const {roomId} = useParams();
-const [roomName, setRoomName] = useState("");
+  const { roomId } = useParams();
+  const [roomName, setRoomName] = useState(""); //<-- Rooms
+  const [messages, setMessages] = useState([]); //<-- Messages
 
-// Every time that roomId changes, we are gping to call a function to get new messagest to that roomId
-useEffect(() => {
-  
-  if (roomId){
-    //
-    db.collection("rooms").doc(roomId).onSnapshot((snapshot)=>(setRoomName(snapshot.data().name)))
-  }
+  // Every time that roomId changes, we are gping to call a function to get new messagest to that roomId
+  useEffect(() => {
+    if (roomId) {
+      //geting the room names and saving them in setRoomName
+      db.collection("rooms")
+        .doc(roomId)
+        .onSnapshot((snapshot) => setRoomName(snapshot.data().name));
 
-}, [roomId])
+      //getting the messages from a room
+      db.collection("rooms")
+        .doc(roomId)
+        .collection("messages")
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot) =>
+          setMessages(snapshot.docs.map((doc) => doc.data()))
+        );
+    }
+  }, [roomId]);
 
-
-
-
-  const sendMessage = (e) =>{
+  const sendMessage = (e) => {
     e.preventDefault();
-      console.log("sending message....", input); // <----PRINT
-      setInput(""); //<-- Clean the input 
-  }
+    console.log("sending message....", input); // <----PRINT
+
+    setInput(""); //<-- Clean the input
+  };
 
   useEffect(() => {
     //Set the seed to a random number and without decimals
@@ -65,18 +71,28 @@ useEffect(() => {
         </div>
       </div>
       <div className="chat__body">
-        <p className={`chat__message ${true && "chat__reciever"}`}>
-          <span className="chat__name">Camilo CV</span>
-          Hi guys
-          <span className="chat__timestamp">3:34pm</span>
-        </p>
+        {messages.map((message) => (
+          <p className={`chat__message ${true && "chat__reciever"}`}>
+            <span className="chat__name">{message.name}</span>
+            {message.message}
+            <span className="chat__timestamp">
+              {new Date (message.timestamp?.toDate()).toUTCString()}</span>
+          </p>
+        ))}
       </div>
 
       <div className="chat__footer">
         <InsertEmoticon />
         <form>
-          <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Type a message" />
-          <button onClick={sendMessage} type= "submit" >Send a message</button>
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            type="text"
+            placeholder="Type a message"
+          />
+          <button onClick={sendMessage} type="submit">
+            Send a message
+          </button>
         </form>
         <Mic />
       </div>
