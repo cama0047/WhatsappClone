@@ -5,11 +5,14 @@ import React, {useState, useEffect} from "react";
 import db from "../Firebase";
 import "./Sidebar.css";
 import SidebarChat from "./SidebarChat";
+import { useStateValue } from "../StateProvider";
 
 
 function Sidebar() {
 
 const [rooms, setRooms] = useState([])
+
+    const [{user}, dispatch] = useStateValue();
   
   
   useEffect(() => {
@@ -38,8 +41,9 @@ const [rooms, setRooms] = useState([])
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <Avatar />
-
+        <Avatar src={user?.photoURL}/>
+        <h2>{user?.displayName}</h2>
+        
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLarge />
@@ -63,11 +67,9 @@ const [rooms, setRooms] = useState([])
       <div className="sidebar__chats">
         <h1>{rooms.data}</h1>
         <SidebarChat addNewChat />
-        {rooms.map(room =>(
-          <SidebarChat key={room.id} id={room.id} name={room.data.name}/>
-
+        {rooms.map((room) => (
+          <SidebarChat key={room.id} id={room.id} name={room.data.name} />
         ))}
-        
       </div>
     </div>
   );

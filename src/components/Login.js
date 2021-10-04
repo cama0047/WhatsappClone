@@ -2,14 +2,25 @@ import React from "react";
 import "./Login.css";
 import {Button} from "@material-ui/core"
 import { auth, provider } from "../Firebase";
+import { useStateValue } from "../StateProvider";
+import { actionType } from "../reducer";
 
 function Login() {
 
-const signIn = () =>{
+    const [{}, dispatch] = useStateValue();
 
+    //Log in With Google auth 
+const signIn = () =>{
     auth
       .signInWithPopup(provider)
-      .then((result) => console.log(result))
+      .then((result) => {
+          console.log("Google Login -> ", result);
+          dispatch({
+              type: actionType.SET_USER,
+              user: result.user,
+          })
+
+      })
       .catch((error) => console.log(error));
 };
 

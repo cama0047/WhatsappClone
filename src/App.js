@@ -5,12 +5,12 @@ import Login from "./components/Login";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, {useState} from 'react';
+import {useStateValue} from "./StateProvider"
 
 
 function App() {
 
-  const [user, setUser] = useState(null)
-
+  const [{ user }, dispatch] = useStateValue();
 
   return (
     <div className="app">
