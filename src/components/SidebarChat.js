@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import "./SidebarChat.css";
+import db from '../Firebase'
 
 const SidebarChat = ({ addNewChat, id, name }) => {
   // Seed will have a random number
@@ -13,10 +14,13 @@ const SidebarChat = ({ addNewChat, id, name }) => {
 
   const createChat = () => {
     const roomName = prompt("please enter a name for the new chat ");
-    console.log("please create ", roomName); // <----PRINT
+    
     if (roomName) {
-      //do something
+  
       // Hint: Create chat
+      db.collection("rooms").add({
+        name: roomName,
+      })
 
     }
   };
@@ -30,6 +34,7 @@ const SidebarChat = ({ addNewChat, id, name }) => {
       </div>
     </div>
   ) : (
+
     <div onClick={createChat} className="sidebarChat">
       <h2>Add New Chat</h2>
     </div>
